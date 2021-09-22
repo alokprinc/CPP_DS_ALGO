@@ -82,8 +82,8 @@ void adjList(){
 }
 int main()
 { 
-    // adjMartix();
+    adjMartix();
 
-    // adjList();
+    adjList();
    
 }
