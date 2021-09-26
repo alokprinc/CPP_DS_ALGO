@@ -10,8 +10,10 @@ using namespace std;
 #define ff first
 #define ss Second
 const int N = 10e6;
-
-
+ // non weighted
+    vi adjL[N + 1]; // n+1 for 1 based indexing
+    // weighted graph
+    vpii adjLW[N + 1];
 void adjMartix()
 {
     int n, m;
@@ -27,7 +29,7 @@ void adjMartix()
         adjm[x][y] = 1;
         adjm[y][x] = 1;
     }
-cout<< "adjm is shown below"<<endl;
+    cout << "adjm is shown below" << endl;
     lpf(i, 1, n + 1)
     {
         lpf(j, 1, n + 1)
@@ -47,18 +49,18 @@ cout<< "adjm is shown below"<<endl;
     }
 }
 
-void adjList(){
+vi adjList()
+{
     int n, m;
     cin >> n >> m;
     // non weighted
-    vi adjL[n+1]; // n+1 for 1 based indexing
-    // weighted graph
-    vpii adjL[n+1];
+  
 
-    lpf(i,0,m){
+    lpf(i, 0, m)
+    {
         // non weighted graph
-        int x,y;
-        cin>>x>>y;
+        int x, y;
+        cin >> x >> y;
 
         adjL[x].push_back(y);
         adjL[y].push_back(x);
@@ -68,22 +70,86 @@ void adjList(){
         //  int x,y,wt;
         // cin>>x>>y>>wt;
 
-        // adjL[x].push_back({y,wt});
-        // adjL[y].push_back({x,wt});
-
+        // adjLW[x].push_back({y,wt});
+        // adjLW[y].push_back({x,wt});
     }
-    cout<< "adjL is shown below"<<endl;
-    lpf(i,1,n+1){
-       cout<<i<<"->";
-       for(int x: adjL[i]){
-           cout<<x<<" ";
-       } cout<<endl;
+    cout << "adjL is shown below" << endl;
+    lpf(i, 1, n + 1)
+    {
+        cout << i << "->";
+        for (int x : adjL[i])
+        {
+            cout << x << " ";
+        }
+        cout << endl;
+    }
+    return adjL[n+1];
+}
+
+vi BFS(vi adj[], int v)
+{
+    vi bfs;
+    vi vis(v + 1, 0);
+
+    lpf(i, 1, v + 1)
+    {
+        if (!vis[i])
+        {
+            queue<int> q;
+            q.push(i);
+            vis[i] = 1;
+
+            while (!q.empty())
+            {
+                int node = q.front();
+                q.pop();
+                bfs.push_back(node);
+
+                for (auto it : adj[node])
+                {
+                    if (!vis[it])
+                    {
+                        q.push(it);
+                        vis[it] = 1;
+                    }
+                }
+            }
+        }
+    }
+    return bfs;
+}
+
+// DFS
+void DFS(int node,vi &vis,vi adjl[],vi &dfs){
+    dfs.push_back(node);
+    vis[node] = 1;
+
+    for(auto it : adjl[node]){
+        if(!vis[it]){
+            DFS(it,vis,adjl,dfs);
+        }
     }
 }
+vi dfsOfGraph(vi adjl[],int v){
+    vi dfs;
+    vi vis(v+1,0);
+    lpf(i,1,v+1){
+        if(!vis[i]){
+            DFS(i,vis,adjl,dfs);
+        }
+    }
+    return dfs;
+}
 int main()
-{ 
-    adjMartix();
+{
+    // adjMartix();
 
     adjList();
-   
+
+   // vi ans  = BFS(adjL,7);
+    vi ans  = dfsOfGraph(adjL,7);
+
+    lpf(i,0,7){
+        cout<<ans[i]<<" ";
+    }
 }
