@@ -70,5 +70,5 @@ lpf(i,0,v){
      } cout<<endl;
  }
 
-cout<< checkCycle(adjl,v);
+cout<< checkCycle(adjl,n);
 }
