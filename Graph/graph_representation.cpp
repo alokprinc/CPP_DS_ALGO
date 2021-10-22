@@ -56,7 +56,7 @@ vi adjList()
     // non weighted
   
 
-    lpf(i, 0, m)
+    lpf(i, 1, m)
     {
         // non weighted graph
         int x, y;
