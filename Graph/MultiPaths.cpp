@@ -23,6 +23,7 @@ struct myComp
     }
 };
 priority_queue<pair<string, int>,vector<pair<string,int>>,myComp> pq;
+//priority_queue<pair<string, int>,vector<pair<string,int>>,greater<pair<string,int>>> pq;
 void hasPath(vpii adjl[], int src, int des, vi vis, string psf, int wsf, int val, int k)
 {
     if (src == des)
