@@ -54,7 +54,7 @@ int main()
     cin >> s >> des;
     vi vis(n, 0);
     cout << hasPath(adjl, s, des, vis);
-    //  for (int i = 0; i < n; i++)
+    //  for (int i = 0; i < n; i++) 
     //     {
     //         cout << i << "->";
     //         vector<pair<int,int>> :: iterator it;

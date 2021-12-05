@@ -12,8 +12,18 @@ using namespace std;
 #define ss Second
 int spathw(INT_MAX), lpathw(INT_MIN), fpathw(INT_MIN), cpathw(INT_MAX);
 string spath, lpath, fpath, cpath;
-priority_queue<pair<string,int>> pq;
-void hasPath(vpii adjl[], int src, int des, vi vis, string psf,int wsf, int val, int k)
+
+struct myComp
+{
+    bool operator()(
+        pair<string, int> &a,
+        pair<string, int> &b)
+    {
+        return a.second > b.second;
+    }
+};
+priority_queue<pair<string, int>,vector<pair<string,int>>,myComp> pq;
+void hasPath(vpii adjl[], int src, int des, vi vis, string psf, int wsf, int val, int k)
 {
     if (src == des)
     {
@@ -41,12 +51,16 @@ void hasPath(vpii adjl[], int src, int des, vi vis, string psf,int wsf, int val,
             fpath = psf;
         }
 
-        if(pq.size() < k){
-            pq.push({psf,wsf});
-        }else{
-            if(pq.top().second >wsf){
+        if (pq.size() < k)
+        {
+            pq.push({psf, wsf});
+        }
+        else
+        {
+            if (pq.top().second < wsf)
+            {
                 pq.pop();
-                pq.push({psf,wsf});
+                pq.push({psf, wsf});
             }
         }
     }
@@ -85,10 +99,14 @@ int main()
     psf = to_string(src);
     int wsf = 0;
     hasPath(adjl, src, des, vis, psf, wsf, val, k);
-    cout<<spath<<"@"<<spathw<<endl;
-    cout<<lpath<<"@"<<lpathw<<endl;
-    cout<<fpath<<"@"<<fpathw<<endl;
-    cout<<cpath<<"@"<<cpathw<<endl;
-    cout<<pq.top().second;
+    cout <<"Smallest Path = " << spath << "@" << spathw << endl;
+    cout << "Largest Path = " <<lpath << "@" << lpathw << endl;
 
+    cout <<  "Just Larger Path than "<<val<<" = " <<cpath << "@" << cpathw << endl;
+    cout << "Just Smaller Path than "<<val<<" = " <<fpath << "@" << fpathw << endl;
+    cout <<k<<"th largest path = "<<pq.top().first <<"@"<<pq.top().second;
+    // cout<<endl;
+    // for(int i = 0; i < pq.size();i++){
+    //     cout<<pq.top().second<<endl;
+    // }
 }

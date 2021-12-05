@@ -51,6 +51,7 @@ void adjMartix()
 
 vi adjList()
 {
+    // n number of nodes  m number of edges 
     int n, m;
     cin >> n >> m;
     // non weighted
@@ -146,10 +147,10 @@ int main()
 
     adjList();
 
-   // vi ans  = BFS(adjL,7);
-    vi ans  = dfsOfGraph(adjL,7);
+//    // vi ans  = BFS(adjL,7);
+//     vi ans  = dfsOfGraph(adjL,7);
 
-    lpf(i,0,7){
-        cout<<ans[i]<<" ";
-    }
+//     lpf(i,0,7){
+//         cout<<ans[i]<<" ";
+//     }
 }

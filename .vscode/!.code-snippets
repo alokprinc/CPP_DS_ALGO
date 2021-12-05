@@ -1,0 +1,26 @@
+{
+	
+	"cpp snippets": {
+		
+		"prefix": "cpp",
+		"body": [
+			
+	    "#include <bits/stdc++.h>",
+			"using namespace std;",
+			" #define vi vector<int>",
+			" #define vvi vector<vi>",
+			" #define pii pair<int, int>",
+			" #define vpii vector<pii>",
+			" #define lpf(i, a, b) for (int i = a; i < b; i++)",
+			" #define lpb(i, b, a) for (int i = b; i >= a; i--)",
+			" #define ff first",
+			" #define ss Second",
+			" const int N = 10e6;",
+			" ",
+			"int main(){",
+			"}"
+
+		],
+		"description": "Log output to console"
+	}
+}
