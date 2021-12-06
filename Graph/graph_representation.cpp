@@ -10,10 +10,10 @@ using namespace std;
 #define ff first
 #define ss Second
 const int N = 10e6;
- // non weighted
-    vi adjL[N + 1]; // n+1 for 1 based indexing
-    // weighted graph
-    vpii adjLW[N + 1];
+// non weighted
+vi adjL[N + 1]; // n+1 for 1 based indexing
+// weighted graph
+vpii adjLW[N + 1];
 void adjMartix()
 {
     int n, m;
@@ -51,11 +51,10 @@ void adjMartix()
 
 vi adjList()
 {
-    // n number of nodes  m number of edges 
+    // n number of nodes  m number of edges
     int n, m;
     cin >> n >> m;
     // non weighted
-  
 
     lpf(i, 1, m)
     {
@@ -84,7 +83,7 @@ vi adjList()
         }
         cout << endl;
     }
-    return adjL[n+1];
+    return adjL[n + 1];
 }
 
 vi BFS(vi adj[], int v)
@@ -121,22 +120,28 @@ vi BFS(vi adj[], int v)
 }
 
 // DFS
-void DFS(int node,vi &vis,vi adjl[],vi &dfs){
+void DFS(int node, vi &vis, vi adjl[], vi &dfs)
+{
     dfs.push_back(node);
     vis[node] = 1;
 
-    for(auto it : adjl[node]){
-        if(!vis[it]){
-            DFS(it,vis,adjl,dfs);
+    for (auto it : adjl[node])
+    {
+        if (!vis[it])
+        {
+            DFS(it, vis, adjl, dfs);
         }
     }
 }
-vi dfsOfGraph(vi adjl[],int v){
+vi dfsOfGraph(vi adjl[], int v)
+{
     vi dfs;
-    vi vis(v+1,0);
-    lpf(i,1,v+1){
-        if(!vis[i]){
-            DFS(i,vis,adjl,dfs);
+    vi vis(v + 1, 0);
+    lpf(i, 1, v + 1)
+    {
+        if (!vis[i])
+        {
+            DFS(i, vis, adjl, dfs);
         }
     }
     return dfs;
@@ -147,10 +152,10 @@ int main()
 
     adjList();
 
-//    // vi ans  = BFS(adjL,7);
-//     vi ans  = dfsOfGraph(adjL,7);
+    //    // vi ans  = BFS(adjL,7);
+    //     vi ans  = dfsOfGraph(adjL,7);
 
-//     lpf(i,0,7){
-//         cout<<ans[i]<<" ";
-//     }
+    //     lpf(i,0,7){
+    //         cout<<ans[i]<<" ";
+    //     }
 }

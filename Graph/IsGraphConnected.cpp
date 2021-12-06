@@ -57,24 +57,12 @@ int main() {
         comps.push_back(comp);
       }
   }
-// for(int i = 0; i < comps.size();i++){
-//     for(int j =0; j < comps[i].size(); j++){
-//         cout<<j;
-//     }
-// }
+if(comps.size()==1){
+    cout<<"true";
+}
+else{
+    cout<<"false";
+}
 
-  cout << "[";
-  for (int i = 0 ; i < comps.size() ; i++) {
-    cout << "[";
-    for (int j = 0 ; j < comps[i].size() ; j++) {
-      if (j != comps[i].size() - 1)
-        cout << comps[i][j] << ", ";
-      else
-        cout << comps[i][j];
-
-    }
-    cout << "]";
-    if (i != comps.size() - 1)cout << ", ";
-  }
-  cout << "]";
+ 
 }
