@@ -107,7 +107,7 @@ Node *construct(vector<int> &arr)
 void iterativePrePostInTraversal(Node *node)
 {
     stack<Pair> st;
-    Pair rootPair = {node, 1};
+    Pair rootPair = {node, 0};
     st.push(rootPair);
 
     vector<int> preOrder;
@@ -117,40 +117,42 @@ void iterativePrePostInTraversal(Node *node)
     {
         Pair rem = st.top();
         
-        if (rem.state == 1)
+        if (rem.state == 0)
         {
             // pre , state++, left
             
             preOrder.push_back(rem.node->data);
-            rem.state=2;
+            rem.state++;
 
             if (rem.node->left != nullptr)
             {
-                Pair leftPair = {rem.node->left, 1};
+                Pair leftPair = {rem.node->left, 0};
                 st.push(leftPair);
             }
             
         }
-        if(rem.state == 2)
+        else if(rem.state == 1)
         { 
             // Inoreder, state++ , right
             InOrder.push_back(rem.node->data);
            
-            rem.state=3;
+            rem.state++;
 
             if (rem.node->right != nullptr)
             {
-                Pair rightPair = {rem.node->right, 1};
+                Pair rightPair = {rem.node->right, 0};
                 st.push(rightPair);
             }
         }
-        if(rem.state==3)
+        else
         {  
             // post ,pop
             postOrder.push_back(rem.node->data);
             st.pop();
             
         } 
+
+        return;
     }
     for(auto a: preOrder){
         cout<<a<<" ";
@@ -161,6 +163,7 @@ void iterativePrePostInTraversal(Node *node)
         for(auto a: postOrder){
         cout<<a<<" ";
     } cout<<endl;
+ 
 }
 
 int main()
