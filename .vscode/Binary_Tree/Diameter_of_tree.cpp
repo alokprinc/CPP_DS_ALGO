@@ -64,19 +64,19 @@ int height(Node* node)
 }
 
 // diameter inefficient n(square)
-// int diameter(Node* node){
-//     if(node == nullptr){
-//         return -1;
-//     }
+int diameter(Node* node){
+    if(node == nullptr){
+        return -1;
+    }
 
-//     int lh = height(node->left);
-//     int rh = height(node->right);
-//     int ld = diameter(node->left);
-//     int rd = diameter(node->right);
+    int lh = height(node->left);
+    int rh = height(node->right);
+    int ld = diameter(node->left);
+    int rd = diameter(node->right);
 
-//     int total = max(max(ld,rd),lh+rh+2);
-//     return total;
-// }
+    int total = max(max(ld,rd),lh+rh+2);
+    return total;
+}
 class DiaPair{
     public:
     int ht;

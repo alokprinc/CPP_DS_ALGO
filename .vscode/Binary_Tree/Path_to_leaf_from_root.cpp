@@ -52,10 +52,10 @@ void pathToLeafFromRoot(Node* node, string path, int sum, int lo, int hi) {
     if(node->left == nullptr and node->right == nullptr ){
         
         sum+=node->data;
-       //if(sum>=lo and sum<=hi){
+       if(sum>=lo and sum<=hi){
            path+=to_string(node->data);
         cout<<path<<endl;
-      // }
+       }
        return;
     }
  pathToLeafFromRoot(node->left,path+to_string(node->data)+" ",sum+node->data,lo,hi);
