@@ -1,8 +1,5 @@
 #include<bits/stdc++.h>
-using namespace std;
- 
- 
- 
+using namespace std; 
 #define vi vector<int>
 #define vvi vector<vi>
 #define pii pair<int,int>
@@ -13,6 +10,7 @@ using namespace std;
 #define ff first
 #define ss Second
 const int N = 10e5;
+
 vi adjl[N]; 
  
 bool detectCycle(int i ,vi vis,vi adjl[],int n){
