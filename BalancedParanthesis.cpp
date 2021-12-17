@@ -60,7 +60,8 @@ bool isValid(string s)
 
 int main()
 {
-    string s = "{[()]}";
+    string s ;
+    getline(cin,s);
     if (isValid(s))
     {
         cout << "Valid";
