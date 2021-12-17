@@ -3,7 +3,7 @@ using namespace std;
 
 int main(){
 	
-	//write your code here
+	
   int n1,n2;
   cin>>n1;
   int arr1[n1];
