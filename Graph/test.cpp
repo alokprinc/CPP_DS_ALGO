@@ -1,74 +1,54 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include<string>
+#include <bits/stdc++.h>
 using namespace std;
-
 class Edge
 {
 public:
-  int src = 0;
-  int nbr = 0;
+  int src;
+  int nbr;
+  int wt;
 
-  Edge(int src, int nbr)
+  Edge(int src, int nbr, int wt)
   {
     this->src = src;
     this->nbr = nbr;
+    this->wt = wt;
   }
 };
-
-
-
-int main() {
-  int vtces;
-  cin >> vtces;
-  vector<vector<Edge>> graph(vtces, vector<Edge>());
-
-
-  int edges;
-  cin >> edges;
-
-  for (int i = 0; i < edges; i++ ) {
-    int u, v, w;
-    cin >> u >> v >> w;
-    graph[u].push_back(Edge(u, v));
-    graph[v].push_back(Edge(v, u));
+void hasPath(vector<Edge> graph[], int src, int des,string psf, vector<int> vis)
+{
+  if (src == des)
+  { 
+    cout<<psf<<endl;
+    return;
   }
+  vis[src] = 1;
 
-  int src;
-  cin >> src;
+  for (auto a : graph[src])
+  {
+    if (!vis[a.nbr])
+    {
+       hasPath(graph, a.nbr, des,psf+to_string(a.nbr), vis);
+    }
+  }
+}
+int main()
+{
+  int v, e;
+  cin >> v >> e;
+  vector<Edge> graph[v];
+  for (int i = 0; i < e; i++)
+  {
+    int x, y, wt;
+    cin >> x >> y >> wt;
+    graph[x].push_back({x,y,wt});
+     graph[y].push_back({y,x,wt});
+  }
+  int src, des;
+  cin >> src >> des;
+  vector<int> vis(v, 0);
   string psf;
-  vector<int> bfs;
-  vector<int> vis(vtces,0);
-  while(bfs.size() != vtces)
-   {
-      if(!vis[src])
-       {
-            queue<int> q;
-            q.push(src);
-            vis[src] = 1;
-            
-            while(!q.empty())
-            {
-                int node = q.front();
-                q.pop();
-                bfs.push_back(node);
-                
-                for(auto it: graph[node])
-                {
-                    if(!vis[it.nbr])
-                    {
-                        q.push(it.nbr);
-                        vis[it.nbr] = 1;
-                    }
-                }
-            }
-        }
-    }
-    
-    for(auto a: bfs){
-        cout<<a;
-    }
-
+  psf = to_string(src);
+  hasPath(graph, src, des,psf, vis);
+  
   return 0;
 }
