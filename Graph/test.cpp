@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+
 class Edge
 {
 public:
@@ -14,41 +16,114 @@ public:
     this->wt = wt;
   }
 };
-void hasPath(vector<Edge> graph[], int src, int des,string psf, vector<int> vis)
+
+struct myComp
 {
-  if (src == des)
-  { 
-    cout<<psf<<endl;
-    return;
+  bool operator()(
+      pair<int, string> &a,
+      pair<int, string> &b)
+  {
+    return a.first > b.first;
+  }
+};
+string spath;
+int spathwt = INT_MAX;
+string lpath;
+int lpathwt = INT_MIN;
+string cpath;
+int cpathwt = INT_MAX;
+string fpath;
+int fpathwt = INT_MIN;
+
+priority_queue<pair<int, string>, vector<pair<int, string>>, myComp> pq;
+
+void multisolver(vector<Edge> graph[], int src, int dest, vector<int> vis, int cap, int k, string psf, int wsf)
+{
+  if (src == dest)
+  {
+    if (spathwt > wsf)
+    {
+      spathwt = wsf;
+      spath = psf;
+    }
+    if (lpathwt < wsf)
+    {
+      lpathwt = wsf;
+      lpath = psf;
+    }
+    if (wsf > cap and cpathwt > wsf)
+    {
+      cpathwt = wsf;
+      cpath = psf;
+    }
+    if (wsf < cap and fpathwt < wsf)
+    {
+      fpathwt = wsf;
+      fpath = psf;
+    }
+
+    if (pq.size() < k)
+    {
+      pq.push({wsf, psf});
+    }
+    else
+    {
+      if (wsf > pq.top().first)
+      {
+        pq.pop();
+        pq.push({wsf, psf});
+      }
+    }
   }
   vis[src] = 1;
 
-  for (auto a : graph[src])
+  for (auto e : graph[src])
   {
-    if (!vis[a.nbr])
+    if (!vis[e.nbr])
     {
-       hasPath(graph, a.nbr, des,psf+to_string(a.nbr), vis);
+      multisolver(graph, e.nbr, dest, vis, cap, k, psf + to_string(e.nbr), wsf + e.nbr);
     }
   }
+  vis[src] = 0;
 }
+
 int main()
 {
-  int v, e;
-  cin >> v >> e;
-  vector<Edge> graph[v];
-  for (int i = 0; i < e; i++)
+
+  int vtces;
+  cin >> vtces;
+  vector<Edge> graph[vtces];
+
+  int edges;
+  cin >> edges;
+  for (int i = 0; i < edges; i++)
   {
-    int x, y, wt;
-    cin >> x >> y >> wt;
-    graph[x].push_back({x,y,wt});
-     graph[y].push_back({y,x,wt});
+    int v1;
+    int v2;
+    int wt;
+    cin >> v1 >> v2 >> wt;
+    graph[v1].push_back(Edge(v1, v2, wt));
+    graph[v2].push_back(Edge(v2, v1, wt));
   }
-  int src, des;
-  cin >> src >> des;
-  vector<int> vis(v, 0);
-  string psf;
-  psf = to_string(src);
-  hasPath(graph, src, des,psf, vis);
-  
+
+  int src;
+  cin >> src;
+  int dest;
+  cin >> dest;
+
+  int criteria;
+  cin >> criteria;
+  int k;
+  cin >> k;
+
+  vector<int> visited(vtces, 0);
+  multisolver(graph, src, dest, visited, criteria, k, src + "0", 0);
+
+  cout << "Smallest Path = " << spath << "@" << spathwt << endl;
+  cout << "Largest Path = " << lpath << "@" << lpathwt << endl;
+  cout << "Just Larger Path than " << criteria << " = " << cpath << "@" << cpathwt << endl;
+  cout << "Just Smaller Path than " << criteria << " = " << fpath << "@" << fpathwt << endl;
+  cout << k << "th largest path = " << pq.top().second << "@" << pq.top().first << endl;
+
   return 0;
 }

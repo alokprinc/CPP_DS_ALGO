@@ -1,0 +1,1 @@
+{"name":"Local: test2","url":"c:\\Users\\alokp\\OneDrive\\Desktop\\CPP_DS_ALGO\\test2.cpp","tests":[{"id":1642517497210,"input":"5\nabcba","output":"3 1 0\n3 0 0\n2 0 0\n1 0 0\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\alokp\\OneDrive\\Desktop\\CPP_DS_ALGO\\test2.cpp","group":"local","local":true}

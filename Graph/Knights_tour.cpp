@@ -12,33 +12,34 @@ void display(vector<vector<int>>& chess) {
   cout << endl;
 }
 
-void printKnightsTour(vector<vector<int>> &chess, int n, int r, int c, int move) {
-    
-    if(r < 0 || c < 0 || r >= n || c >= n || chess[r][c] != 0){
-        return;
-    }
-    if(move == n*n){
-        chess[r][c] = move;
-        display(chess);
-        chess[r][c] = 0;
-        return;
-    }
-    
-    chess[r][c] = move;
-    printKnightsTour(chess,n,r-2,c+1,move+1); 
-    printKnightsTour(chess,n,r-1,c+2,move+1);
-    printKnightsTour(chess,n,r+1,c+2,move+1);
-    printKnightsTour(chess,n,r+2,c+1,move+1);
-    printKnightsTour(chess,n,r+2,c-1,move+1);
-    printKnightsTour(chess,n,r+1,c-2,move+1);
-    printKnightsTour(chess,n,r-1,c-2,move+1);
-    printKnightsTour(chess,n,r-2,c-1,move+1);
+void printKnightTour(vector<vector<int>>& chess, int n, int r, int c, int upcommingMove) {
+
+  if (r < 0 or c < 0 or r >= n or c >= n or chess[r][c] != 0) {
+    return;
+  }
+  if (upcommingMove == n * n) {
+    chess[r][c] = upcommingMove;
+    display(chess);
     chess[r][c] = 0;
+    return;
+  }
+  chess[r][c] = upcommingMove;
+  printKnightTour(chess, n, r - 2, c + 1, upcommingMove + 1);
+  printKnightTour(chess, n, r - 1, c + 2, upcommingMove + 1);
+  printKnightTour(chess, n, r + 1, c + 2, upcommingMove + 1);
+  printKnightTour(chess, n, r + 2, c + 1, upcommingMove + 1);
+  printKnightTour(chess, n, r + 2, c - 1, upcommingMove + 1);
+  printKnightTour(chess, n, r + 1, c - 2, upcommingMove + 1);
+  printKnightTour(chess, n, r - 1, c - 2, upcommingMove + 1);
+  printKnightTour(chess, n, r - 2, c - 1, upcommingMove + 1);
+  chess[r][c] = 0;
+
 }
 
 int main() {
-int n, r, c;
+  int n, r, c;
   cin >> n >> r >> c;
-  vector<vector<int>> chess(n, vector<int> (n, 0));
-  printKnightsTour(chess, n, r, c, 1);
+  vector<vector<int>> chess(n, vector<int>(n, 0));
+  int upcommingMove = 0;
+  printKnightTour(chess, n, r, c, upcommingMove);
 }
