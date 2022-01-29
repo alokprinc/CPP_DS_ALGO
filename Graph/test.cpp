@@ -1,129 +1,105 @@
-#include <bits/stdc++.h>
-
+// { Driver Code Starts
+#include<bits/stdc++.h>
 using namespace std;
 
-class Edge
+ // } Driver Code Ends
+class Solution
 {
-public:
-  int src;
-  int nbr;
-  int wt;
-
-  Edge(int src, int nbr, int wt)
-  {
-    this->src = src;
-    this->nbr = nbr;
-    this->wt = wt;
-  }
+	public:
+	//Function to find the shortest distance of all the vertices
+    //from the source vertex S.
+    class Pair{
+  public:
+   int v;
+   int wsf;
+   string psf;
+   Pair(int v,int wsf,string psf){
+       this->v = v;
+       this->wsf = wsf;
+       this->psf = psf;
+   }
+   
+   
 };
-
 struct myComp
 {
-  bool operator()(
-      pair<int, string> &a,
-      pair<int, string> &b)
-  {
-    return a.first > b.first;
-  }
+    bool operator()(
+        Pair &a,
+        Pair &b)
+    {
+        return a.wsf > b.wsf;
+    }
 };
-string spath;
-int spathwt = INT_MAX;
-string lpath;
-int lpathwt = INT_MIN;
-string cpath;
-int cpathwt = INT_MAX;
-string fpath;
-int fpathwt = INT_MIN;
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int src)
+    {
+    priority_queue<Pair, vector<Pair>, myComp> q;
+      q.push({src,0, to_string(src)});
+        vector<int> ans;
+      vector<int> vis(V, 0);
 
-priority_queue<pair<int, string>, vector<pair<int, string>>, myComp> pq;
-
-void multisolver(vector<Edge> graph[], int src, int dest, vector<int> vis, int cap, int k, string psf, int wsf)
-{
-  if (src == dest)
-  {
-    if (spathwt > wsf)
-    {
-      spathwt = wsf;
-      spath = psf;
-    }
-    if (lpathwt < wsf)
-    {
-      lpathwt = wsf;
-      lpath = psf;
-    }
-    if (wsf > cap and cpathwt > wsf)
-    {
-      cpathwt = wsf;
-      cpath = psf;
-    }
-    if (wsf < cap and fpathwt < wsf)
-    {
-      fpathwt = wsf;
-      fpath = psf;
-    }
-
-    if (pq.size() < k)
-    {
-      pq.push({wsf, psf});
-    }
-    else
-    {
-      if (wsf > pq.top().first)
+      while (!q.empty())
       {
-        pq.pop();
-        pq.push({wsf, psf});
-      }
-    }
-  }
-  vis[src] = 1;
+        Pair rem = q.top();
+        q.pop();
+        if (vis[rem.v]==1)
+        {
+          continue;
+        }
+        vis[rem.v] = 1;
 
-  for (auto e : graph[src])
-  {
-    if (!vis[e.nbr])
-    {
-      multisolver(graph, e.nbr, dest, vis, cap, k, psf + to_string(e.nbr), wsf + e.nbr);
+        ans.push_back(rem.wsf);
+
+        for (auto e : adj[rem.v])
+        { 
+          int nbr = e[0];
+          int wt  = e[1];
+          if (!vis[nbr])
+          {
+            q.push({nbr, rem.wsf + wt,rem.psf + to_string(nbr)});
+          }
+        }
+      }
+      reverse(ans.begin(),ans.end());
+      return ans;
     }
-  }
-  vis[src] = 0;
-}
+};
+
+
+// { Driver Code Starts.
+
 
 int main()
 {
+    int t;
+    cin >> t;
+    while (t--) {
+        int V, E;
+        cin >> V >> E;
+        vector<vector<int>> adj[V];
+        int i=0;
+        while (i++<E) {
+            int u, v, w;
+            cin >> u >> v >> w;
+            vector<int> t1,t2;
+            t1.push_back(v);
+            t1.push_back(w);
+            adj[u].push_back(t1);
+            t2.push_back(u);
+            t2.push_back(w);
+            adj[v].push_back(t2);
+        }
+        int S;
+        cin>>S;
+        
+        Solution obj;
+    	vector<int> res = obj.dijkstra(V, adj, S);
+    	
+    	for(int i=0; i<V; i++)
+    	    cout<<res[i]<<" ";
+    	cout<<endl;
+    }
 
-  int vtces;
-  cin >> vtces;
-  vector<Edge> graph[vtces];
-
-  int edges;
-  cin >> edges;
-  for (int i = 0; i < edges; i++)
-  {
-    int v1;
-    int v2;
-    int wt;
-    cin >> v1 >> v2 >> wt;
-    graph[v1].push_back(Edge(v1, v2, wt));
-    graph[v2].push_back(Edge(v2, v1, wt));
-  }
-
-  int src;
-  cin >> src;
-  int dest;
-  cin >> dest;
-
-  int criteria;
-  cin >> criteria;
-  int k;
-  cin >> k;
-
-  vector<int> visited(vtces, 0);
-  multisolver(graph, src, dest, visited, criteria, k, src + "0", 0);
-
-  cout << "Smallest Path = " << spath << "@" << spathwt << endl;
-  cout << "Largest Path = " << lpath << "@" << lpathwt << endl;
-  cout << "Just Larger Path than " << criteria << " = " << cpath << "@" << cpathwt << endl;
-  cout << "Just Smaller Path than " << criteria << " = " << fpath << "@" << fpathwt << endl;
-  cout << k << "th largest path = " << pq.top().second << "@" << pq.top().first << endl;
-
-  return 0;
+    return 0;
 }
+
+  // } Driver Code Ends

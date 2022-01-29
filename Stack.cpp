@@ -173,4 +173,5 @@ int main()
         cout << stack.top() << " ";
         stack.pop();
     }
+    
 }

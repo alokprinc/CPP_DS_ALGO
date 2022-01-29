@@ -129,7 +129,7 @@ int main(){
     int n = x.size();
     int m = y.size();
     // cout<<"pallindromic sequence is ->  "<<print_pallindrome_seq(x,y,n,m)<<endl;
-    // cout<<"size of pallindrome ->  "<<print_pallindrome_seq(x,y,n,m).size()<<endl;
+    cout<<"size of pallindrome ->  "<<print_pallindrome_seq(x,y,n,m).size()<<endl;
     //  cout<<"pallindromic sub string is ->  "<<print_pallindrome_subString(x,y,n,m)<<endl;
     //cout<<"size of sub string pallindrome ->  "<<print_pallindrome_subString(x,y,n,m).size()<<endl;
     cout<<fun(x,n,m);
