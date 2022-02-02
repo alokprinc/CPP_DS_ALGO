@@ -1,19 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void combination(int i, string uq, int ssf, int ts, string ans )
+void combination(int lval, string uq, int ssf, int ts, string ans )
 {
-  if (i == uq.length())
-    {
-       if (ssf == ts)
-        {  
-                cout << ans << endl; 
-        }
-        return;
-    }
-    
-    combination(i+1,uq,ssf+1,ts,ans + uq[i]);
-    combination(i+1,uq,ssf+0,ts,ans);
+  
+  if(ssf==ts){
+      cout<<ans<<endl;
+      return;
+  }
+  for(int i = lval+1; i < uq.length();i++){
+      char ch = uq[i];
+      combination(i,uq,ssf+1,ts,ans+ch);
+      
+  }
+ 
 }
 int main()
 {
@@ -33,6 +33,6 @@ int main()
             ustr+=ch;
         }
     }
-    combination(0, ustr, 0, k, "");
+    combination(-1, ustr, 0, k, "");
     return 0;
 }
