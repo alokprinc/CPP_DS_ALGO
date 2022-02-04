@@ -25,7 +25,7 @@ void solve(string s1,string s2,string s3,string uq,unordered_map<char,int> mp,ve
             }
             cout<<endl;
         }
-        return;
+      return;  
     }
     char ch = uq[idx];
     for(int i = 0 ; i <= 9;i++){
@@ -37,6 +37,7 @@ void solve(string s1,string s2,string s3,string uq,unordered_map<char,int> mp,ve
             check[i]=0;
         }
     }
+   
 }
 int main(){
     string s1,s2,s3;
