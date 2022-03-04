@@ -6,7 +6,10 @@ int precedence(char ch ){
         return 1;
     }else if(ch == '*' or ch == '/'){
         return 2;
-    }else{
+    }else if(ch == '^'){
+        return 3;
+    }
+    else{
         return 0;
     }
 }
