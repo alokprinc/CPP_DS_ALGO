@@ -1,0 +1,1 @@
+{"name":"Local: rod_cutting","url":"c:\\Users\\alokp\\OneDrive\\Desktop\\CPP_DS_ALGO\\DP\\rod_cutting.cpp","tests":[{"id":1646486231837,"input":"8\n1   \n5   \n8   \n9  \n10 \n17  \n17  \n20","output":"22"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\alokp\\OneDrive\\Desktop\\CPP_DS_ALGO\\DP\\rod_cutting.cpp","group":"local","local":true}
