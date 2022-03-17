@@ -23,9 +23,10 @@ void sol(vector<int> &arr, int n)
         {
             for (int j = 1; j <= arr[i] and i+j < arr.size(); j++)
             {
-                if(dp[i+j] != INT_MAX and dp[i+j] < mn){
-                    mn = dp[i+j];
-                }
+                // if(dp[i+j] != INT_MAX and dp[i+j] < mn){
+                //     mn = dp[i+j];
+                // }
+                mn = min(dp[i+j],mn);
             }
             if (mn != INT_MAX)
             {
